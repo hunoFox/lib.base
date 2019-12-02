@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--圆角imageView-->
+    <declare-styleable name="round_image_view">
+        <attr name="radius" format="dimension"/>
+        <attr name="left_top_radius" format="dimension"/>
+        <attr name="right_top_radius" format="dimension"/>
+        <attr name="right_bottom_radius" format="dimension"/>
+        <attr name="left_bottom_radius" format="dimension"/>
+    </declare-styleable>
+
+    <!--倒计时按钮-->
+    <declare-styleable name="count_down_timer">
+        <!--默认背景-->
+        <attr name="android:background" />
+        <!--点击后背景-->
+        <attr name="clickedBackground" format="reference" />
+        <!--倒计时间-->
+        <attr name="countdownTime" format="integer" />
+        <!--倒计时间完成后提示文字-->
+        <attr name="android:text" format="string" />
+    </declare-styleable>
+
+    <!--侧滑删除RecyclerView-->
+    <declare-styleable name="XRecyclerSwipeMenuLayout">
+        <attr name="XRecyclerLeftViewId" format="reference|integer"/>
+        <attr name="XRecyclerRightViewId" format="reference|integer"/>
+        <attr name="XRecyclerContentViewId" format="reference|integer"/>
+    </declare-styleable>
+
+</resources>
