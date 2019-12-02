@@ -32,6 +32,7 @@ public class CheckUtils {
     public static boolean isEmpty(List list){
         return list == null || list.isEmpty();
     }
+
     public static boolean isEmpty(Object[] list){
         return list == null || list.length <= 0;
     }
