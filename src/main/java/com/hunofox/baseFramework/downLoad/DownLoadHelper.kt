@@ -26,7 +26,7 @@ import java.util.HashMap
  */
 class DownLoadHelper {
 
-    val REQUEST_CODE_UNKNOWN_APP = 80//8.0需要请求未知来源权限
+    private val REQUEST_CODE_UNKNOWN_APP = 80//8.0需要请求未知来源权限
     private var filePath: String? = null
 
     private var serviceMap: HashMap<String, Any>? = null
@@ -35,12 +35,15 @@ class DownLoadHelper {
     fun startDownLoad(
         url: String,
         folderName: String?,
-        fileName: String,
-        listener: DownLoadListener
+        fileName: String?,
+        listener: DownLoadListener?
     ) {
-        var folder = folderName
-        if (folder == null) {
-            folder = ""
+        if(CheckUtils.isEmpty(folderName)){
+            listener?.onFailed("请指定下载位置")
+            return
+        }else if(CheckUtils.isEmpty(fileName)){
+            listener?.onFailed("请指定保存文件名")
+            return
         }
 
         val connection = object : ServiceConnection {
@@ -52,7 +55,7 @@ class DownLoadHelper {
             override fun onServiceDisconnected(name: ComponentName) {}
         }
         val intent = Intent(BaseApp.instance(), DownLoadService::class.java)
-        intent.putExtra("folder", if (folder.endsWith("/")) folder else "$folder/")
+        intent.putExtra("folder", if (folderName!!.endsWith("/")) folderName else "$folderName/")
         intent.putExtra("url", url)
         intent.putExtra("fileName", fileName)
         BaseApp.instance().startService(intent)

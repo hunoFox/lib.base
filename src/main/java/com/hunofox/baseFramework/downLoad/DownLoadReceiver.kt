@@ -19,7 +19,7 @@ class DownLoadReceiver : BroadcastReceiver() {
 
     private var listener: DownLoadHelper.DownLoadListener? = null
     private var downId: Long = 0
-    fun setDownLoadListener(listener: DownLoadHelper.DownLoadListener, downId: Long) {
+    fun setDownLoadListener(listener: DownLoadHelper.DownLoadListener?, downId: Long) {
         this.listener = listener
         this.downId = downId
     }
@@ -42,7 +42,7 @@ class DownLoadReceiver : BroadcastReceiver() {
                     cursor.close()
                 }
             } else {
-                listener!!.onFailed("下载失败,没有匹配到对应的下载文件(002)")
+                listener?.onFailed("下载失败,没有匹配到对应的下载文件(002)")
             }
         }
     }

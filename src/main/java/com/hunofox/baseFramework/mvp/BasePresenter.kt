@@ -27,11 +27,6 @@ open class BasePresenter<T: BaseView> (view:T): NetResultCallback {
     fun registerSubscribe(subscribe: Disposable){
         rxSubscriptions.add(subscribe)
     }
-    fun unRegisterSubscribe(){
-        if(!rxSubscriptions.isDisposed){
-            rxSubscriptions.dispose()
-        }
-    }
 
     init {
         onAttach()
@@ -47,7 +42,9 @@ open class BasePresenter<T: BaseView> (view:T): NetResultCallback {
     open fun onDetach(){
         view.showProgress(false)
         OkHttpUtils.getInstance().cancelTag(this)
-        unRegisterSubscribe()
+        if(!rxSubscriptions.isDisposed){
+            rxSubscriptions.dispose()
+        }
         reference.clear()
     }
 

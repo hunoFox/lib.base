@@ -31,7 +31,7 @@ class DownLoadService: Service() {
     private var receiver: DownLoadReceiver? = null//设置为全局，因为在销毁时需要反注册;
     private var downId: Long = 0
 
-    fun setDownLoadListener(listener: DownLoadHelper.DownLoadListener) {
+    fun setDownLoadListener(listener: DownLoadHelper.DownLoadListener?) {
         this.listener = listener
         if (receiver != null) {
             receiver!!.setDownLoadListener(listener, downId)
