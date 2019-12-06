@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.*
 import com.hunofox.baseFramework.R
+import com.hunofox.baseFramework.utils.CheckUtils
 import java.io.File
 import java.lang.ref.WeakReference
 import java.util.*
@@ -48,7 +49,7 @@ class DownLoadService: Service() {
         val path = intent.getStringExtra("folder")
         val filePath = Environment.getExternalStoragePublicDirectory(path).path + "/"
         val file = File(filePath + fileName!!)
-        if (file.exists()) {
+        if (CheckUtils.isFileExists(file)) {
             val isDeleted = file.delete()
             if (!isDeleted) {
                 fileName = System.currentTimeMillis().toString() + "_" + fileName

@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
  * 1. 应使用以下方法填充布局，否则不能充满整个布局
  * View footView = LayoutInflater.from(activity).inflate(R.layout.add_bank_card, recyclerView, false);
  *
- *
  * 2. 必须在RecyclerView被初始化完毕后调用：
  * adaptor.addFootView(footView);
  * ----------------------------------------------------------------------------------------------------

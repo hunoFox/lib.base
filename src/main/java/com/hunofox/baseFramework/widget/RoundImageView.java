@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Path;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import androidx.appcompat.widget.AppCompatImageView;

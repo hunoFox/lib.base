@@ -3,10 +3,12 @@ package com.hunofox.baseFramework.utils;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
@@ -14,7 +16,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.github.promeg.pinyinhelper.Pinyin;
+import com.hunofox.baseFramework.base.BaseApp;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -89,6 +94,46 @@ public class CheckUtils {
         return Pinyin.toPinyin(str, "");
     }
 
+
+    /**
+     * 根据文件路径判断文件是否存在(适配AndroidQ)
+     *
+     * @param path 文件路径，可以为空
+     * @return true存在；false不存在
+     */
+    public static boolean isFileExists(String path){
+        if(path == null || path.trim().length() <= 0){
+            return false;
+        }
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            //适配Android 10
+            AssetFileDescriptor afd = null;
+            ContentResolver cr = BaseApp.instance().getContentResolver();
+            try {
+                Uri uri = Uri.parse(path);
+                afd = cr.openAssetFileDescriptor(uri, "r");
+                if (afd == null) {
+                    return false;
+                } else {
+                    close(afd);
+                }
+            } catch (FileNotFoundException e) {
+                return false;
+            }finally {
+                close(afd);
+            }
+            return true;
+        }else{
+            return new File(path).exists();
+        }
+    }
+    public static boolean isFileExists(File file){
+        if(file == null){
+            return false;
+        }
+        return isFileExists(file.getAbsolutePath());
+    }
 
     //--------------------------------------------------------------//
 
@@ -203,6 +248,10 @@ public class CheckUtils {
 
     private static OnPermissionListener mOnPermissionListener;
 
-
+    private static void close(AssetFileDescriptor afd){
+        try{
+            afd.close();
+        }catch (Exception e){}
+    }
 
 }

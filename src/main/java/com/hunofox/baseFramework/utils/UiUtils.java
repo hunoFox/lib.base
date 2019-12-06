@@ -19,6 +19,10 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.StringRes;
+import com.hunofox.baseFramework.R;
 import com.hunofox.baseFramework.base.BaseApp;
 
 
@@ -32,21 +36,26 @@ import com.hunofox.baseFramework.base.BaseApp;
  */
 public class UiUtils {
 
-    /**
-     * dip 转换成 px
-     * @param dip
-     * @return
-     */
+    /** dip 转换成 px */
     public static float dp2px(float dip) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, BaseApp.instance().getApplicationContext().getResources().getDisplayMetrics());
     }
 
-    /**
-     * sp转px的方法。
-     */
+    /** sp转px的方法。*/
     public static float sp2px(float spValue) {
         final float fontScale = BaseApp.instance().getApplicationContext().getResources().getDisplayMetrics().scaledDensity;
         return spValue * fontScale + 0.5f;
+    }
+
+    /** 通过colorId获取颜色 */
+    @ColorInt
+    public static int getColor(@ColorRes int colorId){
+        return BaseApp.instance().getApplicationContext().getResources().getColor(colorId);
+    }
+
+    /** 通过strId获取文字 */
+    public static String getString(@StringRes int strId){
+        return BaseApp.instance().getApplicationContext().getResources().getString(strId);
     }
 
     /**
@@ -98,7 +107,7 @@ public class UiUtils {
             BaseApp.instance().getApplicationContext().getSharedPreferences("hunoFoxSp", Context.MODE_PRIVATE).edit().putString("hunoFoxSp_DeviceId", deviceId).apply();
             return deviceId;
         }
-        if(BaseApp.instance().getApplicationContext().getPackageManager().checkPermission(Manifest.permission.READ_PHONE_STATE, BaseApp.instance().getApplicationContext().getPackageName()) == PackageManager.PERMISSION_GRANTED) {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && BaseApp.instance().getApplicationContext().getPackageManager().checkPermission(Manifest.permission.READ_PHONE_STATE, BaseApp.instance().getApplicationContext().getPackageName()) == PackageManager.PERMISSION_GRANTED) {
             try {
                 TelephonyManager mTelephonyMgr = (TelephonyManager) BaseApp.instance().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
                 deviceId = mTelephonyMgr.getDeviceId();

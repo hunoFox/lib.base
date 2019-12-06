@@ -90,7 +90,7 @@ class DownLoadHelper {
      */
     fun installAPK(context: Activity, filePath: String): Boolean {
         val file = File(filePath)
-        if (file.exists()) {
+        if (CheckUtils.isFileExists(file)) {
             val intent = Intent()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 val pm = context.applicationContext.packageManager
@@ -140,7 +140,7 @@ class DownLoadHelper {
                 return
             }
             val file = File(filePath!!)
-            if (!file.exists()) {
+            if (!CheckUtils.isFileExists(file)) {
                 return
             }
             if (resultCode == Activity.RESULT_OK) {
