@@ -95,12 +95,10 @@ public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutLi
                     mKeyBoardListen.onKeyboardChange(false, visibleHeight - rootViewVisibleHeight);
                 }
                 rootViewVisibleHeight = visibleHeight;
-                return;
             }
         }else{
             int currHeight = mContentView.getHeight();
             if (currHeight == 0) {
-                Log.i(TAG, "currHeight is 0");
                 return;
             }
             boolean hasChange = false;
