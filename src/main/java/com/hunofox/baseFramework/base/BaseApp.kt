@@ -12,7 +12,7 @@ import io.reactivex.plugins.RxJavaPlugins
 import kotlin.system.exitProcess
 
 /**
- * 项目名称：TongTong
+ * 项目名称：
  * 项目作者：胡玉君
  * 创建日期：2019/8/20 0020 13:16.
  * ----------------------------------------------------------------------------------------------------
