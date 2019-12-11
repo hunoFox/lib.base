@@ -16,7 +16,7 @@ import java.util.Properties;
  * 文件描述：
  * ----------------------------------------------------------------------------------------------------
  */
-public class RomUtils {
+class RomUtils {
 
 
     class AvailableRomType {

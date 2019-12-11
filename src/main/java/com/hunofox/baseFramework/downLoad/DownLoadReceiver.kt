@@ -40,9 +40,11 @@ class DownLoadReceiver : BroadcastReceiver() {
                         listener?.onFailed("下载失败,没有匹配到对应的下载文件(001)")
                     }
                     cursor.close()
+                    DownLoadHelper.instance.release()
                 }
             } else {
                 listener?.onFailed("下载失败,没有匹配到对应的下载文件(002)")
+                DownLoadHelper.instance.release()
             }
         }
     }

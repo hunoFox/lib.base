@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.*
 import com.hunofox.baseFramework.R
+import com.hunofox.baseFramework.base.BaseApp
 import com.hunofox.baseFramework.utils.CheckUtils
 import java.io.File
 import java.lang.ref.WeakReference
@@ -47,7 +48,21 @@ class DownLoadService: Service() {
         val url = intent.getStringExtra("url")
         var fileName = intent.getStringExtra("fileName")
         val path = intent.getStringExtra("folder")
-        val filePath = Environment.getExternalStoragePublicDirectory(path).path + "/"
+        val filePath = baseContext.getExternalFilesDir(path)?.absolutePath + "/"
+        if(Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()){
+            if(!CheckUtils.isFileExists(filePath)){
+                if(!File(filePath).mkdirs()){
+                    DownLoadHelper.instance.release()
+                    listener?.onFailed("文件创建失败")
+                    return START_NOT_STICKY
+                }
+            }
+        }else{
+            DownLoadHelper.instance.release()
+            listener?.onFailed("文件创建失败")
+            return START_NOT_STICKY
+        }
+
         val file = File(filePath + fileName!!)
         if (CheckUtils.isFileExists(file)) {
             val isDeleted = file.delete()
@@ -71,10 +86,9 @@ class DownLoadService: Service() {
         downLoadRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
 
         downLoadRequest.setVisibleInDownloadsUi(true)
-        Environment.getExternalStoragePublicDirectory(path).mkdir()
 
-        downLoadRequest.setDestinationInExternalPublicDir(path, fileName)
-        downLoadRequest.setTitle(resources.getString(R.string.app_name))
+        downLoadRequest.setDestinationInExternalFilesDir(baseContext, path, fileName)
+        downLoadRequest.setTitle("正在下载")
         downId = downloadManager!!.enqueue(downLoadRequest)
 
         handler = ProgressHandler(this)

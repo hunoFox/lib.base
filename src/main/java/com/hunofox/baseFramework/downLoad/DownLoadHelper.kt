@@ -24,11 +24,15 @@ import java.util.HashMap
  * 文件描述：
  * ----------------------------------------------------------------------------------------------------
  */
-class DownLoadHelper {
+class DownLoadHelper private constructor(){
+
+    companion object {
+        val instance: DownLoadHelper by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { DownLoadHelper() }
+    }
 
     private val REQUEST_CODE_UNKNOWN_APP = 80//8.0需要请求未知来源权限
-    private var filePath: String? = null
 
+    private var filePath: String? = null
     private var serviceMap: HashMap<String, Any>? = null
 
     /** 下载前开启服务，避免因为APP关闭而下载失败  */
@@ -38,6 +42,7 @@ class DownLoadHelper {
         fileName: String?,
         listener: DownLoadListener?
     ) {
+        release()
         if(CheckUtils.isEmpty(folderName)){
             listener?.onFailed("请指定下载位置")
             return
@@ -67,18 +72,24 @@ class DownLoadHelper {
 
     fun release() {
         if (serviceMap != null) {
-            if (serviceMap!!["conn"] != null && serviceMap!!["conn"] is ServiceConnection) {
-                val conn = serviceMap!!.remove("conn") as ServiceConnection
-                BaseApp.instance().unbindService(conn)
-            }
+            try{
+                if (serviceMap!!["conn"] != null && serviceMap!!["conn"] is ServiceConnection) {
+                    val conn = serviceMap!!.remove("conn") as ServiceConnection
+                    BaseApp.instance().unbindService(conn)
+                }
+            }catch (e:Exception){}
 
-            if (serviceMap!!["intent"] != null && serviceMap!!["intent"] is Intent) {
-                val intent = serviceMap!!.remove("intent") as Intent
-                BaseApp.instance().stopService(intent)
-            }
+            try{
+                if (serviceMap!!["intent"] != null && serviceMap!!["intent"] is Intent) {
+                    val intent = serviceMap!!.remove("intent") as Intent
+                    BaseApp.instance().stopService(intent)
+                }
+            }catch (e:Exception){}
+
             serviceMap!!.clear()
         }
         serviceMap = null
+        filePath = null
     }
 
     /**

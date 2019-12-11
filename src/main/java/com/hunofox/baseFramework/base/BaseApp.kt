@@ -6,6 +6,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.widget.Toast
+import com.hunofox.baseFramework.downLoad.DownLoadHelper
 import com.hunofox.baseFramework.utils.Logger
 import io.reactivex.exceptions.UndeliverableException
 import io.reactivex.plugins.RxJavaPlugins
@@ -62,8 +63,11 @@ class BaseApp : Application() {
         }
     }
 
+
     /** 退出APP */
     fun exitApp(){
+        DownLoadHelper.instance.release()
+
         for(bean in activities){
             bean.finish()
         }
