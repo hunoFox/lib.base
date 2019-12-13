@@ -25,9 +25,10 @@ import java.util.concurrent.Executors;
 
 public class Logger {
 
+    private static final boolean showLog = true;
 
     public static void e(String tag, String msg) {
-        if(BuildConfig.DEBUG){
+        if(BuildConfig.DEBUG || showLog){
             Log.e(tag, msg);
             saveLog("E", tag, msg);
         }
@@ -35,7 +36,7 @@ public class Logger {
     }
 
     public static void d(String tag, String msg) {
-        if(BuildConfig.DEBUG){
+        if(BuildConfig.DEBUG || showLog){
             Log.d(tag, msg);
             saveLog("D", tag, msg);
         }
