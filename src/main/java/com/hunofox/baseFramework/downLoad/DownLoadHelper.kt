@@ -43,10 +43,7 @@ class DownLoadHelper private constructor(){
         listener: DownLoadListener?
     ) {
         release()
-        if(CheckUtils.isEmpty(folderName)){
-            listener?.onFailed("请指定下载位置")
-            return
-        }else if(CheckUtils.isEmpty(fileName)){
+        if(CheckUtils.isEmpty(fileName)){
             listener?.onFailed("请指定保存文件名")
             return
         }

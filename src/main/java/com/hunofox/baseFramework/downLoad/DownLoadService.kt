@@ -48,7 +48,7 @@ class DownLoadService: Service() {
         val url = intent.getStringExtra("url")
         var fileName = intent.getStringExtra("fileName")
         val path = intent.getStringExtra("folder")
-        val filePath = baseContext.getExternalFilesDir(path)?.absolutePath + "/"
+        val filePath = baseContext.getExternalFilesDir(if(CheckUtils.isEmpty(path)) "Download" else "Download/$path")?.absolutePath + "/"
         if(Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()){
             if(!CheckUtils.isFileExists(filePath)){
                 if(!File(filePath).mkdirs()){
