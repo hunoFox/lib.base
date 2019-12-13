@@ -79,7 +79,7 @@ public class DeleteBuilder extends BaseBuilder {
 
     @Override
     public RequestCall build() {
-        Logger.e("DEL请求报文", url + "");
+        Logger.d("DEL请求报文", url + "");
         return new DeleteStringRequest(url, tag, params, headers, content, mediaType, isRetry, timeOut).build();
     }
 

@@ -72,7 +72,7 @@ public class OkHttpUtils {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.d("onResponse", response.code() + "(OkHttpUtils.java:77)");
-                if (response.code() >= 400 && response.code() <= 599) {
+                if (response.code() != 200) {
                     try {
                         sendFailResultCallback(call, response.code(), new RuntimeException(response.body().string()), finalCallback, flag);
                     } catch (IOException e) {

@@ -39,7 +39,7 @@ public class PutStringBuilder extends BaseBuilder {
 
     @Override
     public RequestCall build() {
-        Logger.e("PUT请求报文", url + ":" + content + "");
+        Logger.d("PUT请求报文", url + ":" + content + "");
         return new PutRequest(url, tag, params, headers, content, mediaType, isRetry, timeOut).build();
     }
 

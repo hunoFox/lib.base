@@ -13,7 +13,7 @@ import com.hunofox.baseFramework.okHttp.builder.*;
 
 public class OkHttp {
 
-    public static final long DEFAULT_MILLISECONDS = 30000;//默认超时时间30000ms
+    public static final long DEFAULT_MILLISECONDS = 15000;//默认超时时间15000ms
 
     public static GetBuilder get() {
         return new GetBuilder();

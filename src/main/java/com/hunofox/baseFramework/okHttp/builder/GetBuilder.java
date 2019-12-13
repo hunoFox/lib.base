@@ -17,7 +17,7 @@ public class GetBuilder extends BaseBuilder {
         if (params != null) {
             url = appendParams(url, params);
         }
-        Logger.e("GET请求报文", url + "");
+        Logger.d("GET请求报文", url + "");
         return new GetRequest(url, tag, params, headers, isRetry, timeOut).build();
     }
 
