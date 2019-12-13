@@ -25,6 +25,7 @@ import java.util.concurrent.Executors;
 
 public class Logger {
 
+
     public static void e(String tag, String msg) {
         if(BuildConfig.DEBUG){
             Log.e(tag, msg);
@@ -43,17 +44,17 @@ public class Logger {
 
     /**
      * 打开日志文件并写入日志
-     * @param mylogtype
+     * @param logType
      * @param tag
      * @param text
      */
-    private static void saveLog(final String mylogtype, final String tag, final String text) {// 新建或打开日志文件
+    public static void saveLog(final String logType, final String tag, final String text) {// 新建或打开日志文件
         if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())){
             ExecutorService newThread = Executors.newCachedThreadPool();
             newThread.execute(new Runnable() {
                 @Override
                 public void run() {
-                    String message = DateUtils.formatDate2String(new Date()) + " " + mylogtype + "/" + tag + "：" + text;
+                    String message = DateUtils.formatDate2String(new Date()) + " " + logType + "/" + tag + "：" + text;
                     String dirPath = BaseApp.instance().getExternalFilesDir("Log").getAbsolutePath();
                     File dirsFile = new File(dirPath);
                     if (!dirsFile.exists()){
