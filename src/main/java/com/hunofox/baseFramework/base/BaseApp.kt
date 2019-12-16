@@ -20,7 +20,7 @@ import kotlin.system.exitProcess
  * 文件描述：
  * ----------------------------------------------------------------------------------------------------
  */
-class BaseApp : Application() {
+open class BaseApp : Application() {
 
     companion object{
 
@@ -29,7 +29,6 @@ class BaseApp : Application() {
 
         @JvmStatic
         fun instance():BaseApp = instance
-
 
         @JvmStatic
         private var toast:Toast? = null

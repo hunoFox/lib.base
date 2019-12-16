@@ -38,7 +38,7 @@ open class BaseActivity : FragmentActivity(), BaseView, View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Logger.d("当前Activity", this.javaClass.simpleName)
+        Logger.d("当前Activity", "${this.javaClass.simpleName}(BaseActivity.kt:41)")
         BaseApp.instance().activities.add(0, this)
         try{
             if (isPortrait()) requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT

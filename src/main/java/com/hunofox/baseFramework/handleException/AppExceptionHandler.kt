@@ -4,16 +4,12 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
-import android.os.SystemClock
 import com.hunofox.baseFramework.base.BaseApp
 import com.hunofox.baseFramework.utils.CheckUtils
 import com.hunofox.baseFramework.utils.DateUtils
-import com.hunofox.baseFramework.utils.Logger
 import com.hunofox.baseFramework.utils.UiUtils
 import java.io.*
-import java.lang.reflect.Field
 import java.util.*
-import kotlin.collections.HashMap
 import kotlin.collections.LinkedHashMap
 
 
@@ -90,9 +86,17 @@ class AppExceptionHandler private constructor() : Thread.UncaughtExceptionHandle
         try{
             info["设备品牌"] = Build.BRAND
             info["设备型号"] = Build.MODEL
+            info["SDK版本"] = Build.VERSION.SDK_INT.toString()
             info["设备标识码"] = UiUtils.getDeviceID()
-        }catch (e:Exception){
 
+            var cpu = StringBuilder()
+            for(abi in Build.SUPPORTED_ABIS){
+                cpu.append("$abi、")
+            }
+            info["CPU架构"] = cpu.toString().substring(0, cpu.toString().length-1)
+
+        }catch (e:Exception){
+            e.printStackTrace()
         }
     }
 

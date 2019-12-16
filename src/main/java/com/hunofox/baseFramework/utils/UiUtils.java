@@ -172,5 +172,23 @@ public class UiUtils {
         return ((BitmapDrawable) imageView.getDrawable()).getBitmap();
     }
 
+    /**
+     * 获取应用图标
+     *
+     * @return
+     */
+    public static Drawable getAppIcon(){
+        return BaseApp.instance().getResources().getDrawable(BaseApp.instance().getApplicationInfo().icon);
+    }
+
+    /**
+     * 获取应用名称
+     *
+     * @return
+     */
+    public static String getAppName(){
+        return BaseApp.instance().getString(BaseApp.instance().getApplicationInfo().labelRes);
+    }
+
 
 }
