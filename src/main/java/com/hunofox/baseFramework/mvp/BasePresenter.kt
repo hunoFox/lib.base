@@ -2,8 +2,6 @@ package com.hunofox.baseFramework.mvp
 
 import com.hunofox.baseFramework.okHttp.utils.OkHttpUtils
 import com.yibenanfu.tongtong.base.NetResultCallback
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 import kotlin.properties.Delegates
 
@@ -21,13 +19,6 @@ open class BasePresenter<T: BaseView> (view:T): NetResultCallback {
     private val reference = WeakReference<T>(view)
     var view:T by Delegates.notNull<T>()
 
-    //RxAndroid
-    private val rxSubscriptions = CompositeDisposable()
-    //注册
-    fun registerSubscribe(subscribe: Disposable){
-        rxSubscriptions.add(subscribe)
-    }
-
     init {
         onAttach()
     }
@@ -42,9 +33,6 @@ open class BasePresenter<T: BaseView> (view:T): NetResultCallback {
     open fun onDetach(){
         view.showProgress(false)
         OkHttpUtils.getInstance().cancelTag(this)
-        if(!rxSubscriptions.isDisposed){
-            rxSubscriptions.dispose()
-        }
         reference.clear()
     }
 

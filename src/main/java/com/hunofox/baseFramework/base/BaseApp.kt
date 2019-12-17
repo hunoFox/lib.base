@@ -8,8 +8,6 @@ import android.content.SharedPreferences
 import android.widget.Toast
 import com.hunofox.baseFramework.downLoad.DownLoadHelper
 import com.hunofox.baseFramework.utils.Logger
-import io.reactivex.exceptions.UndeliverableException
-import io.reactivex.plugins.RxJavaPlugins
 import kotlin.system.exitProcess
 
 /**
@@ -50,16 +48,6 @@ open class BaseApp : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-
-        RxJavaPlugins.setErrorHandler {
-            e ->
-            if (e is UndeliverableException) {
-                Logger.e("BaseApp检测到", "${e.cause?.message}(BaseApp.kt:62)")
-                e.cause?.printStackTrace()
-            }else{
-                Thread.currentThread().uncaughtExceptionHandler?.uncaughtException(Thread.currentThread(), e)
-            }
-        }
     }
 
 
