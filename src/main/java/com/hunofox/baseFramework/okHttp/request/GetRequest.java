@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class GetRequest extends OkHttpRequest {
 
-    public GetRequest(String url, Object tag, Map<String, String> params, Map<String, String> headers, boolean isRetry, long timeOut) {
-        super(url, tag, params, headers, isRetry, timeOut);
+    public GetRequest(String url, Object tag, Map<String, String> params, Map<String, String> headers, boolean isRetry, long readTimeOut, long writeTimeOut, long connTimeOut) {
+        super(url, tag, params, headers, isRetry, readTimeOut,writeTimeOut,connTimeOut);
     }
 
     @Override

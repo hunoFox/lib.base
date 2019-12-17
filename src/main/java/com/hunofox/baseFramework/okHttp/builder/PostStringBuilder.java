@@ -30,7 +30,7 @@ public class PostStringBuilder extends BaseBuilder {
     @Override
     public RequestCall build() {
         Logger.d("POST请求报文", url + ":" + content + "");
-        return new PostStringRequest(url, tag, params, headers, content, mediaType, isRetry, timeOut).build();
+        return new PostStringRequest(url, tag, params, headers, content, mediaType, isRetry, readTimeOut, writeTimeOut,connTimeOut).build();
     }
 
     @Override
@@ -82,8 +82,10 @@ public class PostStringBuilder extends BaseBuilder {
     }
 
     @Override
-    public PostStringBuilder timeOut(long timeOut) {
-        this.timeOut = timeOut;
+    public PostStringBuilder timeOut(long readTimeOut, long writeTimeOut, long connTimeOut) {
+        this.readTimeOut = readTimeOut;
+        this.writeTimeOut = writeTimeOut;
+        this.connTimeOut = connTimeOut;
         return this;
     }
 }

@@ -55,7 +55,9 @@ public class OkHttpUtils {
         return mOkHttpClient;
     }
 
-
+    /**
+     * 异步执行
+     */
     public void execute(final RequestCall requestCall, BaseCallback callback, final String flag) {
 
         if (callback == null)
@@ -71,7 +73,6 @@ public class OkHttpUtils {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.d("onResponse", response.code() + "(OkHttpUtils.java:77)");
                 if (response.code() != 200) {
                     try {
                         sendFailResultCallback(call, response.code(), new RuntimeException(response.body().string()), finalCallback, flag);
@@ -120,17 +121,17 @@ public class OkHttpUtils {
     }
 
     public void cancelTag(Object tag) {
-        if(tag == null){
+        if (tag == null) {
             mOkHttpClient.dispatcher().cancelAll();
             return;
         }
         for (Call call : mOkHttpClient.dispatcher().queuedCalls()) {
-            if (tag.equals(call.request().tag())) {
+            if (tag.equals(call.request().tag()) || tag == call.request().tag()) {
                 call.cancel();
             }
         }
         for (Call call : mOkHttpClient.dispatcher().runningCalls()) {
-            if (tag.equals(call.request().tag())) {
+            if (tag.equals(call.request().tag()) || tag == call.request().tag()) {
                 call.cancel();
             }
         }

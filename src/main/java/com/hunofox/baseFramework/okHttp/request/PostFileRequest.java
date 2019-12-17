@@ -17,8 +17,8 @@ public class PostFileRequest extends OkHttpRequest {
     private MediaType mediaType;
 
 
-    public PostFileRequest(String url, Object tag, Map<String, String> params, Map<String, String> headers, File file, MediaType mediaType, boolean isRetry, long timeOut) {
-        super(url, tag, params, headers, isRetry, timeOut);
+    public PostFileRequest(String url, Object tag, Map<String, String> params, Map<String, String> headers, File file, MediaType mediaType, boolean isRetry, long readTimeOut, long writeTimeOut, long connTimeOut) {
+        super(url, tag, params, headers, isRetry, readTimeOut, writeTimeOut, connTimeOut);
         this.file = file;
         this.mediaType = mediaType;
         if (this.mediaType == null) {

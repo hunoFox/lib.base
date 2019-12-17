@@ -40,7 +40,7 @@ public class PutStringBuilder extends BaseBuilder {
     @Override
     public RequestCall build() {
         Logger.d("PUT请求报文", url + ":" + content + "");
-        return new PutRequest(url, tag, params, headers, content, mediaType, isRetry, timeOut).build();
+        return new PutRequest(url, tag, params, headers, content, mediaType, isRetry, readTimeOut, writeTimeOut,connTimeOut).build();
     }
 
     @Override
@@ -92,8 +92,10 @@ public class PutStringBuilder extends BaseBuilder {
     }
 
     @Override
-    public PutStringBuilder timeOut(long timeOut) {
-        this.timeOut = timeOut;
+    public PutStringBuilder timeOut(long readTimeOut, long writeTimeOut, long connTimeOut) {
+        this.readTimeOut = readTimeOut;
+        this.writeTimeOut = writeTimeOut;
+        this.connTimeOut = connTimeOut;
         return this;
     }
 }

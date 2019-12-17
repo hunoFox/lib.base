@@ -18,7 +18,7 @@ public class GetBuilder extends BaseBuilder {
             url = appendParams(url, params);
         }
         Logger.d("GET请求报文", url + "");
-        return new GetRequest(url, tag, params, headers, isRetry, timeOut).build();
+        return new GetRequest(url, tag, params, headers, isRetry, readTimeOut, writeTimeOut, connTimeOut).build();
     }
 
     private String appendParams(String url, Map<String, String> params) {
@@ -83,8 +83,10 @@ public class GetBuilder extends BaseBuilder {
     }
 
     @Override
-    public GetBuilder timeOut(long timeOut) {
-        this.timeOut = timeOut;
+    public GetBuilder timeOut(long readTimeOut, long writeTimeOut, long connTimeOut) {
+        this.readTimeOut = readTimeOut;
+        this.writeTimeOut = writeTimeOut;
+        this.connTimeOut = connTimeOut;
         return this;
     }
 }

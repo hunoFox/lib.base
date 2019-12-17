@@ -15,7 +15,10 @@ public abstract class BaseBuilder {
     protected Map<String, String> headers;
     protected Map<String, String> params;
     protected boolean isRetry = true;
-    protected long timeOut = OkHttp.DEFAULT_MILLISECONDS;
+
+    protected long readTimeOut = OkHttp.DEFAULT_MILLISECONDS_READ;
+    protected long writeTimeOut = OkHttp.DEFAULT_MILLISECONDS_WRITE;
+    protected long connTimeOut = OkHttp.DEFAULT_MILLISECONDS_CONNECT;
 
     public abstract BaseBuilder url(String url);
 
@@ -31,7 +34,7 @@ public abstract class BaseBuilder {
 
     public abstract BaseBuilder isRetry(boolean isRetry);
 
-    public abstract BaseBuilder timeOut(long timeOut);
+    public abstract BaseBuilder timeOut(long readTimeOut, long writeTimeOut, long connTimeOut);
 
     public abstract RequestCall build();
 

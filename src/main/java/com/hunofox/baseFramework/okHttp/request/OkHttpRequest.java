@@ -18,20 +18,26 @@ public abstract class OkHttpRequest {
     protected Map<String, String> params;
     protected Map<String, String> headers;
     protected boolean isRetry;
-    protected long timeOut = OkHttp.DEFAULT_MILLISECONDS;
+
+    protected long readTimeOut = OkHttp.DEFAULT_MILLISECONDS_READ;
+    protected long writeTimeOut = OkHttp.DEFAULT_MILLISECONDS_WRITE;
+    protected long connTimeOut = OkHttp.DEFAULT_MILLISECONDS_CONNECT;
 
     protected Request.Builder builder = new Request.Builder();
 
     protected OkHttpRequest(String url, Object tag,
                             Map<String, String> params, Map<String, String> headers,
                             boolean isRetry,
-                            long timeOut) {
+                            long readTimeOut, long writeTimeOut, long connTimeOut) {
         this.url = url;
         this.tag = tag;
         this.params = params;
         this.headers = headers;
         this.isRetry = isRetry;
-        this.timeOut = timeOut;
+
+        this.readTimeOut = readTimeOut;
+        this.writeTimeOut = writeTimeOut;
+        this.connTimeOut = connTimeOut;
     }
 
 
@@ -44,7 +50,7 @@ public abstract class OkHttpRequest {
     protected abstract Request buildRequest(Request.Builder builder, RequestBody requestBody);
 
     public RequestCall build() {
-        return new RequestCall(this, isRetry, timeOut);
+        return new RequestCall(this, isRetry, readTimeOut, writeTimeOut, connTimeOut);
     }
 
     public Request generateRequest(BaseCallback callback) {

@@ -26,8 +26,8 @@ public class PutRequest extends OkHttpRequest {
     private MediaType mediaType;
 
 
-    public PutRequest(String url, Object tag, Map<String, String> params, Map<String, String> headers, String content, MediaType mediaType, boolean isRetry, long timeOut) {
-        super(url, tag, params, headers, isRetry, timeOut);
+    public PutRequest(String url, Object tag, Map<String, String> params, Map<String, String> headers, String content, MediaType mediaType, boolean isRetry, long readTimeOut, long writeTimeOut, long connTimeOut) {
+        super(url, tag, params, headers, isRetry, readTimeOut, writeTimeOut, connTimeOut);
         this.content = content;
         this.mediaType = mediaType;
 

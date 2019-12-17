@@ -25,7 +25,7 @@ public class PostImageBuilder extends BaseBuilder {
             url = appendParams(url, params);
         }
         Log.e("build", url + "(PostImageBuilder.java:28)");
-        return new PostImageRequest(url, tag, null, headers, images, isRetry, timeOut).build();
+        return new PostImageRequest(url, tag, null, headers, images, isRetry, readTimeOut, writeTimeOut, connTimeOut).build();
     }
 
     private String appendParams(String url, Map<String, String> params) {
@@ -118,8 +118,10 @@ public class PostImageBuilder extends BaseBuilder {
     }
 
     @Override
-    public PostImageBuilder timeOut(long timeOut) {
-        this.timeOut = timeOut;
+    public PostImageBuilder timeOut(long readTimeOut, long writeTimeOut, long connTimeOut) {
+        this.readTimeOut = readTimeOut;
+        this.writeTimeOut = writeTimeOut;
+        this.connTimeOut = connTimeOut;
         return this;
     }
 }

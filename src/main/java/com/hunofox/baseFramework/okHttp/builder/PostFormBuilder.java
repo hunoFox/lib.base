@@ -22,7 +22,7 @@ public class PostFormBuilder extends BaseBuilder {
     @Override
     public RequestCall build() {
         Logger.d("POSTFORM请求报文",url + ":" + params);
-        return new PostFormRequest(url, tag, params, headers, files, isRetry, timeOut).build();
+        return new PostFormRequest(url, tag, params, headers, files, isRetry, readTimeOut, writeTimeOut,connTimeOut).build();
     }
 
 
@@ -103,8 +103,10 @@ public class PostFormBuilder extends BaseBuilder {
     }
 
     @Override
-    public PostFormBuilder timeOut(long timeOut) {
-        this.timeOut = timeOut;
+    public PostFormBuilder timeOut(long readTimeOut, long writeTimeOut, long connTimeOut) {
+        this.readTimeOut = readTimeOut;
+        this.writeTimeOut = writeTimeOut;
+        this.connTimeOut = connTimeOut;
         return this;
     }
 }

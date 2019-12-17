@@ -17,8 +17,8 @@ import java.util.Map;
 public class PostFormRequest extends OkHttpRequest {
     private List<PostFormBuilder.FileInput> files;
 
-    public PostFormRequest(String url, Object tag, Map<String, String> params, Map<String, String> headers, List<PostFormBuilder.FileInput> files, boolean isRetry, long timeOut) {
-        super(url, tag, params, headers, isRetry, timeOut);
+    public PostFormRequest(String url, Object tag, Map<String, String> params, Map<String, String> headers, List<PostFormBuilder.FileInput> files, boolean isRetry, long readTimeOut, long writeTimeOut, long connTimeOut) {
+        super(url, tag, params, headers, isRetry, readTimeOut, writeTimeOut, connTimeOut);
         this.files = files;
     }
 

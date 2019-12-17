@@ -29,7 +29,7 @@ public class PostFileBuilder extends BaseBuilder {
 
     @Override
     public RequestCall build() {
-        return new PostFileRequest(url, tag, params, headers, file, mediaType, isRetry, timeOut).build();
+        return new PostFileRequest(url, tag, params, headers, file, mediaType, isRetry, readTimeOut, writeTimeOut, connTimeOut).build();
     }
 
     @Override
@@ -81,8 +81,10 @@ public class PostFileBuilder extends BaseBuilder {
     }
 
     @Override
-    public PostFileBuilder timeOut(long timeOut) {
-        this.timeOut = timeOut;
+    public PostFileBuilder timeOut(long readTimeOut, long writeTimeOut, long connTimeOut) {
+        this.readTimeOut = readTimeOut;
+        this.writeTimeOut = writeTimeOut;
+        this.connTimeOut = connTimeOut;
         return this;
     }
 }

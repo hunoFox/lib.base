@@ -20,8 +20,8 @@ public class PostImageRequest extends OkHttpRequest {
 
     private List<PostImageBuilder.FileInput> imageList;
 
-    public PostImageRequest(String url, Object tag, Map<String, String> params, Map<String, String> headers, List<PostImageBuilder.FileInput> files, boolean isRetry, long timeOut) {
-        super(url, tag, params, headers, isRetry, timeOut);
+    public PostImageRequest(String url, Object tag, Map<String, String> params, Map<String, String> headers, List<PostImageBuilder.FileInput> files, boolean isRetry, long readTimeOut, long writeTimeOut, long connTimeOut) {
+        super(url, tag, params, headers, isRetry, readTimeOut, writeTimeOut, connTimeOut);
         this.imageList = files;
     }
 

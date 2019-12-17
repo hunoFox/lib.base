@@ -72,15 +72,17 @@ public class DeleteBuilder extends BaseBuilder {
     }
 
     @Override
-    public DeleteBuilder timeOut(long timeOut) {
-        this.timeOut = timeOut;
+    public DeleteBuilder timeOut(long readTimeOut, long writeTimeOut, long connTimeOut) {
+        this.readTimeOut = readTimeOut;
+        this.writeTimeOut = writeTimeOut;
+        this.connTimeOut = connTimeOut;
         return this;
     }
 
     @Override
     public RequestCall build() {
         Logger.d("DEL请求报文", url + "");
-        return new DeleteStringRequest(url, tag, params, headers, content, mediaType, isRetry, timeOut).build();
+        return new DeleteStringRequest(url, tag, params, headers, content, mediaType, isRetry, readTimeOut, writeTimeOut, connTimeOut).build();
     }
 
 

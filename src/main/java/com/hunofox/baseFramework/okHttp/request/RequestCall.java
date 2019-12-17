@@ -26,11 +26,11 @@ public class RequestCall {
     protected long connTimeOut;
     protected OkHttpClient clone;
 
-    public RequestCall(OkHttpRequest request, boolean isRetry, long timeOut) {
+    public RequestCall(OkHttpRequest request, boolean isRetry, long readTimeOut, long writeTimeOut, long connTimeOut) {
 
-        readTimeOut(timeOut);
-        writeTimeOut(timeOut);
-        connTimeOut(timeOut);
+        readTimeOut(readTimeOut);
+        writeTimeOut(writeTimeOut);
+        connTimeOut(connTimeOut);
 
         this.okHttpRequest = request;
         this.isRetry = isRetry;
@@ -57,9 +57,9 @@ public class RequestCall {
 
         if (readTimeOut > 0 || writeTimeOut > 0 || connTimeOut > 0) {
 
-            readTimeOut = readTimeOut > 0 ? readTimeOut : OkHttp.DEFAULT_MILLISECONDS;
-            writeTimeOut = writeTimeOut > 0 ? writeTimeOut : OkHttp.DEFAULT_MILLISECONDS;
-            connTimeOut = connTimeOut > 0 ? connTimeOut : OkHttp.DEFAULT_MILLISECONDS;
+            readTimeOut = readTimeOut > 0 ? readTimeOut : OkHttp.DEFAULT_MILLISECONDS_READ;
+            writeTimeOut = writeTimeOut > 0 ? writeTimeOut : OkHttp.DEFAULT_MILLISECONDS_WRITE;
+            connTimeOut = connTimeOut > 0 ? connTimeOut : OkHttp.DEFAULT_MILLISECONDS_CONNECT;
 
             clone = OkHttpUtils.getInstance().getOkHttpClient().newBuilder()
                     .retryOnConnectionFailure(isRetry)
@@ -79,6 +79,12 @@ public class RequestCall {
         return okHttpRequest.generateRequest(callback);
     }
 
+    /**
+     * 异步请求
+     *
+     * @param callback  回调
+     * @param flag      事件分发标志
+     */
     public void execute(BaseCallback callback, String flag) {
         generateCall(callback);
 
@@ -88,6 +94,18 @@ public class RequestCall {
 
         OkHttpUtils.getInstance().execute(this, callback, flag);
     }
+
+    /**
+     * 同步请求
+     *
+     * @return
+     * @throws IOException
+     */
+    public Response execute() throws IOException {
+        generateCall(null);
+        return call.execute();
+    }
+
 
     public Call getCall() {
         return call;
@@ -99,11 +117,6 @@ public class RequestCall {
 
     public OkHttpRequest getOkHttpRequest() {
         return okHttpRequest;
-    }
-
-    public Response execute() throws IOException {
-        generateCall(null);
-        return call.execute();
     }
 
     public void cancel() {

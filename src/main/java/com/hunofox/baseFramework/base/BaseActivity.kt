@@ -118,6 +118,7 @@ open class BaseActivity : FragmentActivity(), BaseView, View.OnClickListener {
                 hintDialog?.show(msg, onDialogListener)
             }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -135,6 +136,7 @@ open class BaseActivity : FragmentActivity(), BaseView, View.OnClickListener {
                 selectDialog?.show(msg, onDialogListener)
             }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
