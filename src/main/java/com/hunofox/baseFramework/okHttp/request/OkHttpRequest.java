@@ -43,7 +43,7 @@ public abstract class OkHttpRequest {
 
     protected abstract RequestBody buildRequestBody();
 
-    protected RequestBody wrapRequestBody(RequestBody requestBody, final BaseCallback callback) {
+    protected RequestBody wrapRequestBody(RequestBody requestBody, final BaseCallback callback, final String flag) {
         return requestBody;
     }
 
@@ -53,8 +53,8 @@ public abstract class OkHttpRequest {
         return new RequestCall(this, isRetry, readTimeOut, writeTimeOut, connTimeOut);
     }
 
-    public Request generateRequest(BaseCallback callback) {
-        RequestBody requestBody = wrapRequestBody(buildRequestBody(), callback);
+    public Request generateRequest(BaseCallback callback, String flag) {
+        RequestBody requestBody = wrapRequestBody(buildRequestBody(), callback, flag);
         prepareBuilder();
         return buildRequest(builder, requestBody);
     }

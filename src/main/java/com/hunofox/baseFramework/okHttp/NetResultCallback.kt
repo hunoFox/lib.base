@@ -1,4 +1,4 @@
-package com.yibenanfu.tongtong.base
+package com.hunofox.baseFramework.okHttp
 
 /**
  * 项目名称：
@@ -14,5 +14,7 @@ interface NetResultCallback {
     fun onErr(retFlag:String, retMsg:String, response:String? = null, flag:String? = null)
 
     fun getViewName():String?
+
+    fun inProgress(progress:Float, flag: String)
 
 }

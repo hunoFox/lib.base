@@ -52,8 +52,8 @@ public class RequestCall {
     }
 
 
-    public Call generateCall(BaseCallback callback) {
-        request = generateRequest(callback);
+    public Call generateCall(BaseCallback callback, String flag) {
+        request = generateRequest(callback, flag);
 
         if (readTimeOut > 0 || writeTimeOut > 0 || connTimeOut > 0) {
 
@@ -75,8 +75,8 @@ public class RequestCall {
         return call;
     }
 
-    protected Request generateRequest(BaseCallback callback) {
-        return okHttpRequest.generateRequest(callback);
+    protected Request generateRequest(BaseCallback callback, String flag) {
+        return okHttpRequest.generateRequest(callback, flag);
     }
 
     /**
@@ -86,10 +86,10 @@ public class RequestCall {
      * @param flag      事件分发标志
      */
     public void execute(BaseCallback callback, String flag) {
-        generateCall(callback);
+        generateCall(callback, flag);
 
         if (callback != null) {
-            callback.onBefore(request);
+            callback.onBefore(request, flag);
         }
 
         OkHttpUtils.getInstance().execute(this, callback, flag);
@@ -102,7 +102,7 @@ public class RequestCall {
      * @throws IOException
      */
     public Response execute() throws IOException {
-        generateCall(null);
+        generateCall(null, null);
         return call.execute();
     }
 

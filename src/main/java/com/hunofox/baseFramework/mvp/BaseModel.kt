@@ -1,5 +1,6 @@
-package com.yibenanfu.tongtong.base
+package com.hunofox.baseFramework.mvp
 
+import com.hunofox.baseFramework.okHttp.NetResultCallback
 import java.lang.ref.WeakReference
 
 /**

@@ -178,6 +178,10 @@ open class BaseActivity : FragmentActivity(), BaseView, View.OnClickListener {
         return this.javaClass.simpleName
     }
 
+    override fun inProgress(progress: Float, flag: String) {
+
+    }
+
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         finish()
         overridePendingTransition(0, 0)

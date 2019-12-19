@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.hunofox.baseFramework.utils.Logger;
 
 /**
  * Abstract wheel adapter provides common functionality for adapters.
@@ -298,7 +299,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
                 text = view.findViewById(textResource);
             }
         } catch (ClassCastException e) {
-            Log.e("AbstractWheelAdapter",
+            Logger.e("AbstractWheelAdapter",
                     "You must supply a resource ID for a TextView");
             throw new IllegalStateException(
                     "AbstractWheelAdapter requires the resource ID to be a TextView",

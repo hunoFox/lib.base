@@ -29,29 +29,15 @@ public abstract class BaseStringCallBack extends BaseCallback<String>{
 
     @Override
     public void onError(Call call, int responseCode, Exception e, String flag) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("ResponseCode：" + responseCode + "\n");
-        sb.append("flag：" + flag + "\n");
-        sb.append(e.getMessage() + "\n");
+        Logger.e(flag + "错误响应(" + responseCode + ")", e.getMessage() + "(BaseStringCallBack.java:49)");
+        e.printStackTrace();
 
-        Writer writer = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(writer);
-        e.printStackTrace(printWriter);
-        Throwable cause = e.getCause();
-        while (cause != null){
-            cause.printStackTrace(printWriter);
-            cause = cause.getCause();
-        }
-        printWriter.close();
-        sb.append(writer.toString());
-
-        Logger.e(flag + "响应(" + responseCode + ")", sb.toString() + "(BaseStringCallBack.java:49)");
         onResponseError(call, responseCode, e, flag);
     }
 
     @Override
     public void onResponse(String response, String flag) {
-        Logger.d(flag + "响应(200)", response + "(BaseStringCallBack.java:55)");
+        Logger.d(flag + "成功响应(200)", response + "(BaseStringCallBack.java:55)");
         onResponseSuccess(response, flag);
     }
 

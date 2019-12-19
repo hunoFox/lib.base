@@ -86,6 +86,10 @@ open class BaseFragment : Fragment(), BaseView, View.OnClickListener{
         return this.javaClass.simpleName
     }
 
+    override fun inProgress(progress: Float, flag: String) {
+
+    }
+
     //activity回调
     protected var activityCallBackReference:WeakReference<ActivityCallBack?>? = null
     fun setOnActivityCallBack(activityCallBack:ActivityCallBack?){

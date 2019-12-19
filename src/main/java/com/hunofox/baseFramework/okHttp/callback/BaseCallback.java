@@ -5,24 +5,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public abstract class BaseCallback<T> {
-    /**
-     * UI Thread
-     *
-     * @param request
-     */
 
-    public String className_;
-    public Object beanName_;
-
-    public void setResultBeanName(Object beanName) {
-        this.beanName_ = beanName;
-    }
-
-    public void setResultClassName(String className) {
-        this.className_ = className;
-    }
-
-    public void onBefore(Request request) {
+    public void onBefore(Request request, String flag) {
     }
 
     /**
@@ -30,7 +14,7 @@ public abstract class BaseCallback<T> {
      *
      * @param
      */
-    public void onAfter() {
+    public void onAfter(String flag) {
 
     }
 
@@ -39,7 +23,9 @@ public abstract class BaseCallback<T> {
      *
      * @param progress
      */
-    public void inProgress(float progress) {}
+    public void inProgress(float progress, String flag) {
+
+    }
 
     /**
      * Thread Pool Thread

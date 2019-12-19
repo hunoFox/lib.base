@@ -98,7 +98,7 @@ public class OkHttpUtils {
             @Override
             public void run() {
                 callback.onError(call, responseCode, e, flag);
-                callback.onAfter();
+                callback.onAfter(flag);
             }
         });
     }
@@ -109,7 +109,7 @@ public class OkHttpUtils {
             @Override
             public void run() {
                 callback.onResponse(object, flag);
-                callback.onAfter();
+                callback.onAfter(flag);
             }
         });
     }

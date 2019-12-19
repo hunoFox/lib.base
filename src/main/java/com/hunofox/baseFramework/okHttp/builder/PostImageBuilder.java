@@ -3,6 +3,7 @@ package com.hunofox.baseFramework.okHttp.builder;
 import android.util.Log;
 import com.hunofox.baseFramework.okHttp.request.PostImageRequest;
 import com.hunofox.baseFramework.okHttp.request.RequestCall;
+import com.hunofox.baseFramework.utils.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class PostImageBuilder extends BaseBuilder {
         if (params != null) {
             url = appendParams(url, params);
         }
-        Log.e("build", url + "(PostImageBuilder.java:28)");
+        Logger.d("build", url + "(PostImageBuilder.java:28)");
         return new PostImageRequest(url, tag, null, headers, images, isRetry, readTimeOut, writeTimeOut, connTimeOut).build();
     }
 

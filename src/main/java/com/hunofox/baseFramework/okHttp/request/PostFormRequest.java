@@ -43,7 +43,7 @@ public class PostFormRequest extends OkHttpRequest {
     }
 
     @Override
-    protected RequestBody wrapRequestBody(RequestBody requestBody, final BaseCallback callback) {
+    protected RequestBody wrapRequestBody(RequestBody requestBody, final BaseCallback callback, final String flag) {
         if (callback == null) return requestBody;
         CountingRequestBody countingRequestBody = new CountingRequestBody(requestBody, new CountingRequestBody.Listener() {
             @Override
@@ -52,7 +52,7 @@ public class PostFormRequest extends OkHttpRequest {
                 OkHttpUtils.getInstance().getDelivery().post(new Runnable() {
                     @Override
                     public void run() {
-                        callback.inProgress(bytesWritten * 1.0f / contentLength);
+                        callback.inProgress(bytesWritten * 1.0f / contentLength, flag);
                     }
                 });
 

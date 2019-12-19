@@ -1,8 +1,8 @@
 package com.hunofox.baseFramework.mvp
 
+import com.hunofox.baseFramework.okHttp.NetResultCallback
 import com.hunofox.baseFramework.widget.dialog.HintDialog
 import com.hunofox.baseFramework.widget.dialog.SelectDialog
-import com.yibenanfu.tongtong.base.NetResultCallback
 
 
 /**
