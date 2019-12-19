@@ -20,7 +20,7 @@ open class BasePresenter<T: BaseView> (view:T): NetResultCallback {
 
     //弱引用View
     private val reference = WeakReference<T>(view)
-    protected var view:T by Delegates.notNull<T>()
+    protected fun view() = reference.get()!!
 
     //Kotlin协程
     private val kotlinJobs = ArrayList<Job>()
@@ -34,15 +34,13 @@ open class BasePresenter<T: BaseView> (view:T): NetResultCallback {
 
     private fun onAttach(){
         if(reference.get() != null){
-            this.view = reference.get()!!
-            view.getPresenterList().add(this)
+            view().getPresenterList().add(this)
         }
     }
 
     open fun onDetach(){
-        view.showProgress(false)
+        view().showProgress(false)
         OkHttpUtils.getInstance().cancelTag(getViewName())
-        reference.clear()
         if(!CheckUtils.isEmpty(kotlinJobs)){
             for(job in kotlinJobs){
                 try{
@@ -55,17 +53,18 @@ open class BasePresenter<T: BaseView> (view:T): NetResultCallback {
             }
         }
         kotlinJobs.clear()
+        reference.clear()
     }
 
-    override fun onSuccess(response: String, flag: String) {}
+    override fun onSuccess(json: String, flag: String) {}
 
-    override fun onErr(retFlag: String, retMsg: String, response: String?, flag: String?) {
-        view.showProgress(false)
-        view.onErr(retFlag, retMsg, response, flag)
+    override fun onErr(retFlag: String, retMsg: String, json: String?, flag: String?) {
+        view().showProgress(false)
+        view().onErr(retFlag, retMsg, json, flag)
     }
 
     override fun getViewName(): String? {
-        return view.javaClass.simpleName
+        return view().javaClass.simpleName
     }
 
     override fun inProgress(progress: Float, flag: String) {

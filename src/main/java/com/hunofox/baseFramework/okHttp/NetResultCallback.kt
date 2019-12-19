@@ -10,8 +10,8 @@ package com.hunofox.baseFramework.okHttp
  */
 interface NetResultCallback {
 
-    fun onSuccess(response:String, flag:String)
-    fun onErr(retFlag:String, retMsg:String, response:String? = null, flag:String? = null)
+    fun onSuccess(json:String, flag:String)
+    fun onErr(retFlag:String, retMsg:String, json:String? = null, flag:String? = null)
 
     fun getViewName():String?
 

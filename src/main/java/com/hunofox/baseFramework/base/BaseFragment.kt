@@ -75,9 +75,9 @@ open class BaseFragment : Fragment(), BaseView, View.OnClickListener{
 
     override fun onClick(v: View?) {}
 
-    override fun onSuccess(response: String, flag: String) {}
+    override fun onSuccess(json: String, flag: String) {}
 
-    override fun onErr(retFlag: String, retMsg: String, response: String?, flag: String?) {
+    override fun onErr(retFlag: String, retMsg: String, json: String?, flag: String?) {
         showProgress(false)
         showDialog(retMsg)
     }

@@ -167,9 +167,9 @@ open class BaseActivity : FragmentActivity(), BaseView, View.OnClickListener {
 
     override fun getPresenterList(): ArrayList<BasePresenter<out BaseView>> = presenters
 
-    override fun onSuccess(response: String, flag: String) {}
+    override fun onSuccess(json: String, flag: String) {}
 
-    override fun onErr(retFlag: String, retMsg: String, response: String?, flag: String?) {
+    override fun onErr(retFlag: String, retMsg: String, json: String?, flag: String?) {
         showProgress(false)
         showDialog(retMsg)
     }
