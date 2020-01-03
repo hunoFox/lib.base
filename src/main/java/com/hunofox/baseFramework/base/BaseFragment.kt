@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.hunofox.baseFramework.mvp.BasePresenter
 import com.hunofox.baseFramework.mvp.BaseView
 import com.hunofox.baseFramework.utils.CheckUtils
+import com.hunofox.baseFramework.widget.dialog.EditDialog
 import com.hunofox.baseFramework.widget.dialog.HintDialog
 import com.hunofox.baseFramework.widget.dialog.SelectDialog
 import org.greenrobot.eventbus.EventBus
@@ -61,6 +62,15 @@ open class BaseFragment : Fragment(), BaseView, View.OnClickListener{
     }
 
     /**
+     * 展示一个带文本编辑框的dialog
+     */
+    fun showDialog(hintMsg:String?, onDialogListener: EditDialog.OnDialogListener){
+        if(activity is BaseActivity){
+            (activity as BaseActivity).showDialog(hintMsg, onDialogListener)
+        }
+    }
+
+    /**
      * 展示一个耗时操作的等待弹框
      *
      * @param show  true为展示;false收起
@@ -87,7 +97,7 @@ open class BaseFragment : Fragment(), BaseView, View.OnClickListener{
     }
 
     override fun inProgress(progress: Float, flag: String) {
-
+        //文件上传进度回调
     }
 
     //activity回调

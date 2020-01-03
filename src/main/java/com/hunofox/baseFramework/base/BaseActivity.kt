@@ -12,6 +12,7 @@ import com.hunofox.baseFramework.mvp.BaseView
 import com.hunofox.baseFramework.utils.CheckUtils
 import com.hunofox.baseFramework.utils.Logger
 import com.hunofox.baseFramework.utils.StatusBarUtils
+import com.hunofox.baseFramework.widget.dialog.EditDialog
 import com.hunofox.baseFramework.widget.dialog.HintDialog
 import com.hunofox.baseFramework.widget.dialog.LoadingProgress
 import com.hunofox.baseFramework.widget.dialog.SelectDialog
@@ -19,7 +20,7 @@ import org.greenrobot.eventbus.EventBus
 
 
 /**
- * 项目名称：OpenEyeVideo
+ * 项目名称：
  * 项目作者：胡玉君
  * 创建日期：2017/8/29 13:55.
  * ----------------------------------------------------------------------------------------------------
@@ -33,12 +34,15 @@ open class BaseActivity : FragmentActivity(), BaseView, View.OnClickListener {
 
     private var hintDialog: HintDialog? = null
     private var selectDialog: SelectDialog? = null
+    private var editDialog:EditDialog? = null
     private var loading: LoadingProgress? = null
+
+    //presenter管理类
     private val presenters = ArrayList<BasePresenter<out BaseView>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Logger.d("当前Activity", "${this.javaClass.simpleName}(BaseActivity.kt:41)")
+        Logger.d("当前Activity", "${this.javaClass.simpleName}(BaseActivity.kt:45)")
         BaseApp.instance().activities.add(0, this)
         try{
             if (isPortrait()) requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -81,13 +85,18 @@ open class BaseActivity : FragmentActivity(), BaseView, View.OnClickListener {
         presenters.clear()
         showProgress(false)
         loading = null
+
         hintDialog?.dismiss()
         selectDialog?.dismiss()
+        editDialog?.dismiss()
         hintDialog?.release()
         selectDialog?.release()
+        editDialog?.release()
+        hintDialog = null
+        selectDialog = null
+        editDialog = null
 
         EventBus.getDefault().unregister(this)
-
         BaseApp.instance().activities.remove(this)
     }
 
@@ -141,6 +150,21 @@ open class BaseActivity : FragmentActivity(), BaseView, View.OnClickListener {
     }
 
     /**
+     * 展示一个带文本编辑框的dialog
+     */
+    fun showDialog(hintMsg:String?, onDialogListener: EditDialog.OnDialogListener){
+        try{
+            if(editDialog == null){
+                editDialog = EditDialog.showDialog(this, hintMsg, onDialogListener)
+            }else{
+                editDialog?.show(hintMsg, onDialogListener)
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+    /**
      * 展示一个耗时操作的等待弹框
      *
      * @param show  true为展示;false收起
@@ -179,7 +203,7 @@ open class BaseActivity : FragmentActivity(), BaseView, View.OnClickListener {
     }
 
     override fun inProgress(progress: Float, flag: String) {
-
+        //文件上传进度
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
