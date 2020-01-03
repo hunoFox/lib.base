@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -94,6 +95,7 @@ public class EditDialog extends AlertDialog {
             Point point = new Point();
             manager.getDefaultDisplay().getSize(point);
             params.width = (int) (point.x * 0.7f);
+            params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
             window.setAttributes(params);
         }
 
