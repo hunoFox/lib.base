@@ -1,59 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rl_container"
-        android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="?android:attr/actionBarSize">
+<RelativeLayout android:id="@+id/rl_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="@color/white">
 
     <!--?attr/actionBarSize-->
     <ImageView
-            android:id="@+id/iv_left"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:paddingLeft="15dp"
-            android:paddingRight="10dp"
-            android:src="@drawable/icon_title_left_arrow_black"
-    />
-
-    <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:lines="1"
-            android:maxWidth="260dp"
-            android:text="@string/app_name"
-            android:textColor="@color/text_black"
-            android:textSize="20sp"/>
+        android:id="@+id/iv_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
+        android:src="@drawable/icon_title_left_arrow_black" />
 
     <ImageView
-            android:id="@+id/iv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingRight="15dp"
-            android:visibility="gone"/>
+        android:id="@+id/iv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="15dp"
+        android:visibility="gone" />
 
     <TextView
-            android:id="@+id/tv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="10dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
-            android:visibility="gone"/>
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:lines="1"
+        android:maxWidth="260dp"
+        android:text="@string/app_name"
+        android:textColor="@color/text_black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
     <View
         style="@style/Divider"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

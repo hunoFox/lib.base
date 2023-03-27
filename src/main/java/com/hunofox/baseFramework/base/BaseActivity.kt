@@ -206,7 +206,8 @@ open class BaseActivity : FragmentActivity(), BaseView, View.OnClickListener {
         //文件上传进度
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
         finish()
         overridePendingTransition(0, 0)
     }

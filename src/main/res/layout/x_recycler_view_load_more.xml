@@ -16,7 +16,8 @@
 -->
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:viewBindingIgnore="true">
 
     <ProgressBar
         android:id="@+id/progress_bar"

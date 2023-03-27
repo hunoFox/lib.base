@@ -27,6 +27,10 @@ open class BasePresenter<T: BaseView> (view:T): NetResultCallback {
     fun registerJob(job:Job){
         kotlinJobs.add(job)
     }
+    fun unRegisterJob(job:Job){
+        kotlinJobs.remove(job)
+        job.cancel()
+    }
 
     init {
         onAttach()

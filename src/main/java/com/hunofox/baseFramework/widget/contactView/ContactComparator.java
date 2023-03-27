@@ -1,7 +1,6 @@
 package com.hunofox.baseFramework.widget.contactView;
 
-import com.github.promeg.pinyinhelper.Pinyin;
-
+import com.hunofox.baseFramework.utils.CheckUtils;
 import java.util.Comparator;
 
 /**
@@ -16,8 +15,8 @@ public class ContactComparator implements Comparator<String> {
 
     @Override
     public int compare(String o1, String o2) {
-        String pinyin1 = Pinyin.toPinyin(o1,"");
-        String pinyin2 = Pinyin.toPinyin(o2,"");
+        String pinyin1 = CheckUtils.str2pinyin(o1);
+        String pinyin2 = CheckUtils.str2pinyin(o2);
         int c1 = (pinyin1.charAt(0) + "").toUpperCase().hashCode();
         int c2 = (pinyin2.charAt(0) + "").toUpperCase().hashCode();
 

@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:gravity="center_horizontal"
-              android:minWidth="280dp"
-              android:background="@drawable/shape_download"
-              android:minHeight="120dp"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_download"
+    android:gravity="center_horizontal"
+    android:minHeight="120dp"
+    android:minWidth="280dp"
+    android:orientation="vertical"
+    tools:viewBindingIgnore="true">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="下载进度"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/text_black"
-        android:textSize="16sp"
-        />
 
     <RelativeLayout
-        android:layout_marginTop="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginTop="32dp">
+
         <TextView
             android:id="@+id/tv_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
             android:text="下载进度：0%"
-            android:textSize="12sp"
-            />
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_size"
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
+            android:layout_alignParentRight="true"
             android:text="(已下载0KB / 总大小正在计算)"
-            android:textSize="12sp"
-            />
+            android:textColor="@color/text_black"
+            android:textSize="12sp" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/shape_down_load"
         android:layout_width="match_parent"
         android:layout_height="16dp"
         android:layout_marginBottom="26dp"
-        android:padding="3dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/shape_down_load"
         android:gravity="center"
-        >
+        android:padding="3dp">
+
         <ProgressBar
             android:id="@+id/progressBar"
-            android:progress="0"
-            android:max="100"
             style="@style/downLoadProgressBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:max="100"
+            android:progress="0" />
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="下载进度"
+        android:textColor="@color/text_black"
+        android:textSize="16sp" />
 
 </LinearLayout>

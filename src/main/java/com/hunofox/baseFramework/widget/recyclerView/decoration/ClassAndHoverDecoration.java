@@ -10,7 +10,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.github.promeg.pinyinhelper.Pinyin;
 import com.hunofox.baseFramework.utils.CheckUtils;
 
 import java.util.List;
@@ -66,8 +65,8 @@ public class ClassAndHoverDecoration extends RecyclerView.ItemDecoration {
             } else if(position >= datas.size()) {
                 outRect.set(0, 0, 0, 0);
             } else {
-                String firstCase = Pinyin.toPinyin(datas.get(position), "");
-                String lastFirstCase = Pinyin.toPinyin(datas.get(position - 1), "");
+                String firstCase = CheckUtils.str2pinyin(datas.get(position));
+                String lastFirstCase = CheckUtils.str2pinyin(datas.get(position - 1));
                 if (!CheckUtils.isEmpty(firstCase) && !firstCase.substring(0, 1).equals(lastFirstCase.substring(0, 1))) {
                     outRect.set(0, (int) hoverHeight, 0, 0);
                 } else {
@@ -97,8 +96,8 @@ public class ClassAndHoverDecoration extends RecyclerView.ItemDecoration {
                 } else if(position >= datas.size()){
 
                 } else {
-                    String firstCase = Pinyin.toPinyin(datas.get(position), "");
-                    String lastFirstCase = Pinyin.toPinyin(datas.get(position - 1), "");
+                    String firstCase = CheckUtils.str2pinyin(datas.get(position));
+                    String lastFirstCase = CheckUtils.str2pinyin(datas.get(position - 1));
                     if (!CheckUtils.isEmpty(firstCase) && !firstCase.substring(0, 1).equals(lastFirstCase.substring(0, 1))) {
                         drawTitle(c, left, right, child, params, position);
                     }
@@ -113,8 +112,8 @@ public class ClassAndHoverDecoration extends RecyclerView.ItemDecoration {
         c.drawRect(left, child.getTop() - params.topMargin - hoverHeight, right, child.getTop() - params.topMargin, paint);
         paint.setColor(textColor);
 
-        paint.getTextBounds(Pinyin.toPinyin(datas.get(position), "").substring(0, 1), 0, 1, bounds);
-        c.drawText(Pinyin.toPinyin(datas.get(position), "").substring(0, 1),
+        paint.getTextBounds(CheckUtils.str2pinyin(datas.get(position)).substring(0, 1), 0, 1, bounds);
+        c.drawText(CheckUtils.str2pinyin(datas.get(position)).substring(0, 1),
                 child.getPaddingLeft(),
                 child.getTop() - params.topMargin - (hoverHeight / 2 - bounds.height() / 2), paint);
     }
@@ -123,13 +122,13 @@ public class ClassAndHoverDecoration extends RecyclerView.ItemDecoration {
     public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         int position = ((LinearLayoutManager) (parent.getLayoutManager())).findFirstVisibleItemPosition();
         if (position == -1) return;//在搜索到没有的索引的时候position可能等于-1，所以在这里判断一下
-        String tag = Pinyin.toPinyin(datas.get(position), "").substring(0, 1);
+        String tag = CheckUtils.str2pinyin(datas.get(position)).substring(0, 1);
         View child = parent.findViewHolderForLayoutPosition(position).itemView;
         //Canvas是否位移过的标志
         boolean flag = false;
         if ((position + 1) < datas.size()) {
             //当前第一个可见的Item的字母索引，不等于其后一个item的字母索引，说明悬浮的View要切换了
-            if (!tag.equals(Pinyin.toPinyin(datas.get(position + 1), "").substring(0, 1))) {
+            if (!tag.equals(CheckUtils.str2pinyin(datas.get(position + 1)).substring(0, 1))) {
                 //当第一个可见的item在屏幕中剩下的高度小于title的高度时，开始悬浮Title的动画
                 if (child.getHeight() + child.getTop() < hoverHeight) {
                     c.save();

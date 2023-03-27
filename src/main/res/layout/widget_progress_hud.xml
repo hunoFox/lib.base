@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center"
-              android:background="@drawable/shape_progress_hud"
-              android:gravity="center_horizontal"
-              android:orientation="vertical"
-              android:paddingBottom="20dp"
-              android:paddingLeft="30dp"
-              android:paddingRight="30dp"
-              android:paddingTop="20dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/shape_progress_hud"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="20dp"
+    tools:viewBindingIgnore="true">
 
     <ImageView
         android:id="@+id/spinnerImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/spinner_progress_hud"/>
+        android:background="@drawable/spinner_progress_hud" />
 
     <TextView
         android:id="@+id/message"
@@ -23,6 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="请稍候..."
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF" />
 </LinearLayout>
 

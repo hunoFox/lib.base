@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hunofox.baseFramework.R
+import com.hunofox.baseFramework.databinding.FragmentBaseListBinding
 import com.hunofox.baseFramework.widget.recyclerView.BaseRecyclerAdapter
 import com.hunofox.baseFramework.widget.recyclerView.LoadMoreRecyclerView
-import kotlinx.android.synthetic.main.fragment_base_list.*
 
 /**
  * 项目名称：OpenEyeVideo
@@ -49,8 +49,8 @@ abstract class BaseListFragment : BaseFragment() , SwipeRefreshLayout.OnRefreshL
      * 注意：super事件不能删除
      */
     override fun onRefresh() {
-        swipeRefreshLayout?.isRefreshing = true
-        recyclerView?.setLoadMoreEnable(false)
+        bing.swipeRefreshLayout.isRefreshing = true
+        bing.recyclerView.setLoadMoreEnable(false)
     }
 
     /**
@@ -59,8 +59,8 @@ abstract class BaseListFragment : BaseFragment() , SwipeRefreshLayout.OnRefreshL
      * 注意：super事件不能删除
      */
     override fun onLoadMore() {
-        swipeRefreshLayout?.isRefreshing = false
-        swipeRefreshLayout?.isEnabled = false
+        bing.swipeRefreshLayout.isRefreshing = false
+        bing.swipeRefreshLayout.isEnabled = false
     }
 
     /**
@@ -70,7 +70,7 @@ abstract class BaseListFragment : BaseFragment() , SwipeRefreshLayout.OnRefreshL
      */
     fun setRefreshEnable(enable:Boolean){
         this.refreshEnable = enable
-        swipeRefreshLayout?.isEnabled = enable
+        bing.swipeRefreshLayout.isEnabled = enable
     }
 
     /**
@@ -80,7 +80,7 @@ abstract class BaseListFragment : BaseFragment() , SwipeRefreshLayout.OnRefreshL
      */
     fun setLoadMoreEnable(enable:Boolean){
         this.loadMoreEnable = enable
-        recyclerView?.setLoadMoreEnable(enable)
+        bing.recyclerView.setLoadMoreEnable(enable)
     }
 
     /**
@@ -92,8 +92,8 @@ abstract class BaseListFragment : BaseFragment() , SwipeRefreshLayout.OnRefreshL
         if(refresh){
             onRefresh()
         }else{
-            swipeRefreshLayout?.isRefreshing = false
-            recyclerView?.setLoadMoreEnable(loadMoreEnable)
+            bing.swipeRefreshLayout.isRefreshing = false
+            bing.recyclerView.setLoadMoreEnable(loadMoreEnable)
         }
     }
 
@@ -107,10 +107,10 @@ abstract class BaseListFragment : BaseFragment() , SwipeRefreshLayout.OnRefreshL
      *      STATE_NO_MORE           没有更多数据，不再加载
      */
     fun setLoadMoreState(state:Int){
-        recyclerView?.loadMoreState = state
-        swipeRefreshLayout?.isEnabled = refreshEnable
+        bing.recyclerView?.loadMoreState = state
+        bing.swipeRefreshLayout?.isEnabled = refreshEnable
         if(state == LoadMoreRecyclerView.State.STATE_LOADING_DATA){
-            swipeRefreshLayout?.isEnabled = false
+            bing.swipeRefreshLayout?.isEnabled = false
         }
     }
 
@@ -118,34 +118,43 @@ abstract class BaseListFragment : BaseFragment() , SwipeRefreshLayout.OnRefreshL
     private var loadMoreEnable = true
     private var columnCount = 1
 
+    private var _binding:FragmentBaseListBinding? = null
+    private val bing get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_base_list, container, false)
+        _binding = FragmentBaseListBinding.inflate(inflater,container,false)
+        return bing.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //初始化下拉刷新
-        swipeRefreshLayout.setOnRefreshListener(this)
-        swipeRefreshLayout.setColorSchemeResources(
+        bing.swipeRefreshLayout.setOnRefreshListener(this)
+        bing.swipeRefreshLayout.setColorSchemeResources(
                 R.color.colorPrimary,
                 android.R.color.holo_green_light,
                 R.color.colorPrimaryDark,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_red_light)
-        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(android.R.color.white)
-        swipeRefreshLayout.setProgressViewOffset(false, 0,
+        bing.swipeRefreshLayout.setProgressBackgroundColorSchemeResource(android.R.color.white)
+        bing.swipeRefreshLayout.setProgressViewOffset(false, 0,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         10f,
                         resources.displayMetrics).toInt())
-        swipeRefreshLayout.isEnabled = refreshEnable
+        bing.swipeRefreshLayout.isEnabled = refreshEnable
 
         //初始化RecyclerView及上拉加载
-        recyclerView.isFocusable = false
-        recyclerView.setOnLoadMoreListener(this)
-        recyclerView.setColumnCount(columnCount)
-        recyclerView.adapter = getAdaptor()
-        recyclerView.setLoadMoreEnable(loadMoreEnable)
+        bing.recyclerView.isFocusable = false
+        bing.recyclerView.setOnLoadMoreListener(this)
+        bing.recyclerView.setColumnCount(columnCount)
+        bing.recyclerView.adapter = getAdaptor()
+        bing.recyclerView.setLoadMoreEnable(loadMoreEnable)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onDestroy() {

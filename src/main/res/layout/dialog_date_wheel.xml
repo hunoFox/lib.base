@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_radius_3dp_top"
-                android:descendantFocusability="afterDescendants"
-                android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_radius_3dp_top"
+    android:descendantFocusability="afterDescendants"
+    android:orientation="vertical"
+    tools:viewBindingIgnore="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/line"
+        android:gravity="center">
+
+        <com.hunofox.baseFramework.widget.wheelView.WheelView
+            android:id="@+id/wv_years"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1" />
+
+        <com.hunofox.baseFramework.widget.wheelView.WheelView
+            android:id="@+id/wv_month"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.hunofox.baseFramework.widget.wheelView.WheelView
+            android:id="@+id/wv_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1" />
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rl"
@@ -23,7 +52,7 @@
             android:text="取消"
             android:textColor="@color/text_gray"
             android:textSize="14sp"
-            android:textStyle="normal"/>
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -34,7 +63,7 @@
             android:text="开始日期"
             android:textColor="@color/colorPrimary"
             android:textSize="14sp"
-            android:textStyle="normal"/>
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/tv_confirm"
@@ -47,38 +76,11 @@
             android:paddingRight="20dp"
             android:text="确定"
             android:textColor="@color/text_black"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <View
         android:id="@+id/line"
         style="@style/Divider"
-        android:layout_below="@id/rl"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@id/line"
-        android:gravity="center">
-
-        <com.hunofox.baseframework.widget.wheelView.WheelView
-            android:id="@+id/wv_years"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"/>
-
-        <com.hunofox.baseframework.widget.wheelView.WheelView
-            android:id="@+id/wv_month"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <com.hunofox.baseframework.widget.wheelView.WheelView
-            android:id="@+id/wv_day"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"/>
-    </LinearLayout>
+        android:layout_below="@id/rl" />
 </RelativeLayout>

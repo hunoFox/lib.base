@@ -2,27 +2,24 @@ package com.hunofox.baseFramework.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import com.github.promeg.pinyinhelper.Pinyin;
+
 import com.hunofox.baseFramework.base.BaseApp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 /**
  * 项目名称：WxApproval
@@ -47,18 +44,6 @@ public class CheckUtils {
         return str == null || str.length() <= 0;
     }
 
-    public static void checkPermissions(Activity activity, int requestCode, OnPermissionListener callback, String... permission) {
-        requestPermissions(activity, requestCode, callback, permission);
-    }
-
-    public static void checkPermissions(android.app.Fragment fragment, int requestCode, OnPermissionListener callback, String... permission) {
-        requestPermissions(fragment, requestCode, callback, permission);
-    }
-
-    public static void checkPermissions(Fragment fragment, int requestCode, OnPermissionListener callback, String... permission) {
-        requestPermissions(fragment, requestCode, callback, permission);
-    }
-
     /** 启动当前应用设置页面 */
     public static void startAppSettings(Context context) {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
@@ -77,6 +62,18 @@ public class CheckUtils {
         }
     }
 
+    public static void checkPermissions(Activity activity, int requestCode, OnPermissionListener callback, String... permission) {
+        requestPermissions(activity, requestCode, callback, permission);
+    }
+
+    public static void checkPermissions(android.app.Fragment fragment, int requestCode, OnPermissionListener callback, String... permission) {
+        requestPermissions(fragment, requestCode, callback, permission);
+    }
+
+    public static void checkPermissions(Fragment fragment, int requestCode, OnPermissionListener callback, String... permission) {
+        requestPermissions(fragment, requestCode, callback, permission);
+    }
+
     /**
      * 判断权限有没有授权，无权限，不请求授权
      *
@@ -90,7 +87,7 @@ public class CheckUtils {
 
     public static String str2pinyin(String str){
         if(isEmpty(str)) return str;
-        return Pinyin.toPinyin(str, "");
+        return "a";
     }
 
 
@@ -135,8 +132,6 @@ public class CheckUtils {
     }
 
     //--------------------------------------------------------------//
-
-
 
     private static int mRequestCode = -1;
 

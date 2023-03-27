@@ -102,23 +102,24 @@ public class UiUtils {
 
     /** 获取设备标识码 */
     public static String getDeviceID(){
-        String deviceId = Settings.Secure.getString(BaseApp.instance().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + Build.SERIAL;
-        if(deviceId != null && deviceId.length() > 0){
-            BaseApp.instance().getApplicationContext().getSharedPreferences("hunoFoxSp", Context.MODE_PRIVATE).edit().putString("hunoFoxSp_DeviceId", deviceId).apply();
-            return deviceId;
-        }
+        String deviceId = null;
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && BaseApp.instance().getApplicationContext().getPackageManager().checkPermission(Manifest.permission.READ_PHONE_STATE, BaseApp.instance().getApplicationContext().getPackageName()) == PackageManager.PERMISSION_GRANTED) {
             try {
                 TelephonyManager mTelephonyMgr = (TelephonyManager) BaseApp.instance().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
                 deviceId = mTelephonyMgr.getDeviceId();
-                BaseApp.instance().getApplicationContext().getSharedPreferences("hunoFoxSp", Context.MODE_PRIVATE).edit().putString("hunoFoxSp_DeviceId", deviceId).apply();
             } catch (Exception e) {
                 e.printStackTrace();
-                deviceId = BaseApp.instance().getApplicationContext().getSharedPreferences("hunoFoxSp", Context.MODE_PRIVATE).getString("hunoFoxSp_DeviceId", "");
             }
-        }else{
-            deviceId = BaseApp.instance().getApplicationContext().getSharedPreferences("hunoFoxSp", Context.MODE_PRIVATE).getString("hunoFoxSp_DeviceId", "000000");
         }
+
+        if(deviceId == null || "".equals(deviceId)){
+            deviceId = Settings.Secure.getString(BaseApp.instance().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        }
+
+        if(deviceId == null || "".equals(deviceId)){
+            deviceId =  "0000000000";
+        }
+        BaseApp.instance().getApplicationContext().getSharedPreferences("hunoFoxSp", Context.MODE_PRIVATE).edit().putString("hunoFoxSp_DeviceId", deviceId).apply();
         return deviceId;
     }
 

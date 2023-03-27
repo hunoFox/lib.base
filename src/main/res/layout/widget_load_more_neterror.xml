@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center"
-              android:orientation="horizontal">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:viewBindingIgnore="true">
 
     <ImageView
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_marginRight="4dp"
-        android:src="@drawable/ic_tip"/>
+        android:src="@drawable/ic_tip" />
 
     <TextView
         android:id="@+id/tv_error"
@@ -18,5 +20,5 @@
         android:layout_marginLeft="4dp"
         android:text="网络环境异常"
         android:textColor="#B5B5B5"
-        android:textSize="14dp"/>
+        android:textSize="14dp" />
 </LinearLayout>

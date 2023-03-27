@@ -34,9 +34,16 @@ public class HeaderBar extends RelativeLayout {
         this(context, null);
     }
 
-    public HeaderBar(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public HeaderBar(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
+    }
 
+    public HeaderBar(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public HeaderBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
         reference = new WeakReference<>((Activity) context);
 
         LayoutInflater.from(context).inflate(R.layout.widget_header, this);
